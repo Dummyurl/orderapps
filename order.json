@@ -1,0 +1,34 @@
+{
+	"full_name":"pankaj",
+	"email":"pankaj@gmail.com",
+	"phone_no":"9827698850",
+	"intruction":null,
+	"discount_code":null,
+	"delivery":true,
+	"collection":false,
+	"delivery_post_code":"B1 1AA",
+	"address_line1":"1st Floor Pramukh Plaza, Near Sajan Prabha Garden, Vijay Nagar, Indore, Madhya Pradesh",
+	"address_line2":null,
+	"city":"Indore",
+	"request_delivery_time":null,	
+		"product_detail":{
+				"0":{
+					"itm_name":"Pizza 8 Cheese",
+					"itm_price":"4.65"
+				},
+				"1":{
+					"itm_name":"Set Meal A",
+					"itm_price":"7.95"
+				},
+				"2":{
+					"itm_name":"Tandoori Mix",
+					"itm_price":"12.00"
+				}
+
+		},
+	"discount":null,
+	"delivery_charge":"1.60",
+	"transacation_fee":	"0.50"
+
+		
+}

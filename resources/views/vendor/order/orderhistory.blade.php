@@ -14,7 +14,7 @@
                     <div class="card">
                         <div class="header">
                             <h2>
-                                PENDING ORDERS
+                                ORDERS HISTORY
                             </h2>
                         </div>
                         <div class="body">

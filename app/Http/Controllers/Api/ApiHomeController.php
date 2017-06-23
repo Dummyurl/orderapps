@@ -9,6 +9,7 @@ use App\Models\DiscountModel;
 use App\Models\ProductModel;
 use App\Models\TimingModel;
 use App\Models\OrderModel;
+use App\Models\CustomerModel;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Carbon\Carbon;
@@ -101,8 +102,24 @@ class ApiHomeController extends Controller
 
 
     public function newOrder(Request $request){
-        // dd(Input::all());
         $data = Input::all();
+        $customer = CustomerModel::whereEmail($data['email'])->first();
+       // dd($customer);
+
+           if($customer == null){
+               $customerArray = [
+                   'customer_name'=>$data['full_name'],
+                   'email'=>$data['email'],
+                   'customer_mobile'=>$data['phone_no'],
+                   'created_at'=>Carbon::now(),
+               ];
+
+               $customer_id = CustomerModel::insertGetId($customerArray);
+           }
+           else{
+               $customer_id = $customer->id;
+           }
+
         //dd($data);
 //        $data = '{
 //  "full_name":"pankaj",
@@ -146,6 +163,10 @@ class ApiHomeController extends Controller
         $pro_detail = json_encode($pro_detail_tem);
         $data['product_detail'] =$pro_detail;
         $data['created_at'] = Carbon::now();
+        $data['customer_id'] = $customer_id;
+
+        //temporary Transcation Id
+        $data['transcation_id'] = str_random(25);
 
         $insert = OrderModel::insert($data);
         $return_array = [

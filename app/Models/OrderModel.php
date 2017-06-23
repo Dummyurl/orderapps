@@ -12,7 +12,8 @@ use Illuminate\Database\Eloquent\Model;
         return $query->select('id','product_detail','total')->where('status','pending');
     }
 
-        public function scopeGetOrderById($query,$id){
+    public function scopeGetOrderById($query,$id){
             return $query->where('id',$id);
-        }
+    }
+
 }

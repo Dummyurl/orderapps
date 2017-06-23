@@ -49,10 +49,10 @@
                     </a>
                     <ul class="ml-menu">
                         <li class="{{(isset($sub_page) && $sub_page && $sub_page=='pending-order')?'active':''}}">
-                            <a href="{{ url('/product/add-product')  }}">Pending-Orders</a>
+                            <a href="{{ url('/order/pending-order')  }}">Pending Orders</a>
                         </li>
                         <li class="{{(isset($sub_page) && $sub_page && $sub_page=='order-history')?'active':''}}">
-                            <a href="{{ url('/product/view-all-product')  }}">
+                            <a href="{{ url('/order/order-history')  }}">
                                 Order History
                             </a>
 

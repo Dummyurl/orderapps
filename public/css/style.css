@@ -8050,3 +8050,17 @@ html.ie11 .bs-searchbox .form-control {
 .custom-modal-dialog{
   width: 980px;
 }
+
+.confirm-loading{
+  display: none;
+}
+
+/*.confirm-loading{*/
+  /*position: fixed;*/
+  /*left: 0px;*/
+  /*top: 0px;*/
+  /*width: 100%;*/
+  /*height: 100%;*/
+  /*z-index: 999999;*/
+
+/*}*/

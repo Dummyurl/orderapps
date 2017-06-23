@@ -40,7 +40,6 @@ class CategoryRepository{
                 foreach ($data as $key => $value){
                     $insertArray = [
                         'cat_id' => $cat_id,
-                        'category_name'=> $category,
                         'attribute_name'=> $value,
                         'created_at'=>Carbon::now()
                     ];

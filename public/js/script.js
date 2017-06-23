@@ -401,7 +401,7 @@ $('#without_attribute').change(function () {
             url: APP_URL + '/get-order/' + id,
             data: id,
             success: function(data) {
-                console.log(data);
+                $('#orderId').val(data.id);
                 $('#userName').text(data.full_name);
                 $('#contact_no').text(data.phone_no);
                 $('#userEmail').text(data.email);
@@ -443,5 +443,23 @@ $('#without_attribute').change(function () {
         $('#orderDetails').printThis();
     });
 
+
+    $(document).on('click','#confirmOrder',function () {
+        $(this).css("opacity","0.5")
+        var id = $('#orderId').val();
+        $.ajax({
+            type: "POST",
+            url: APP_URL + '/order/confirm-order' ,
+            data: {'id':id,'_token':token},
+            success: function (data) {
+                $(this).css("opacity","1")
+                if(data.status == true){
+                    window.location.href = APP_URL + '/dashboard';
+                }
+
+            }
+        });
+
+    });
 
 });

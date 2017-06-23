@@ -6,8 +6,11 @@
 
 <body class="theme-red">
 
+
 <script type="text/javascript">
     var APP_URL = {!! json_encode(url('/')) !!}
+    var token = '{!! csrf_token() !!}'
+
 </script>
 @if(session('returnStatus'))
     @include('partials.message')

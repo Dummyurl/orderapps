@@ -33,6 +33,7 @@ class CreateOrderTable extends Migration
             $table->string('transacation_fee')->nullable();
             $table->string('total')->nullable();
             $table->string('status')->default('pending');
+            $table->string('transcation_id');
             $table->timestamps();
         });
     }

@@ -54,3 +54,9 @@ Route::group(['prefix' => 'product','namespace' => 'Admin'], function () {
     Route::get('/view-bucket-product','ProductController@viewBucketProducts');
 
 });
+
+Route::group(['prefix' => 'order','namespace' => 'Admin'], function () {
+    Route::get('/pending-order','OrderController@getPendingOrder');
+    Route::get('/order-history','OrderController@orderHistory');
+    Route::post('/confirm-order','OrderController@confirmOrder');
+});

@@ -253,8 +253,11 @@ class AdminController extends Controller
         return view('vendor.admin.coupon',compact('page','coupon'));
     }
 
-    /*
-     * Add New Coupon.
+    /**
+     * Add New Coupon
+     * @param Request $req
+     * @param CrudRepository $repo
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function addNewCoupon(Request $req,CrudRepository $repo){
         if($repo->updateCoupon($req->all()))

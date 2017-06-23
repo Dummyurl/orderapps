@@ -85,22 +85,21 @@
                         </div>
                     </div>
                     <div class="body">
-
-                            <ul class="list-group">
-                                @foreach($orders as $key_ord => $value_ord)
-                                    <li class="list-group-item">
-                                            <?php
-                                            $temp_array = [];
-                                            foreach ($value_ord['product_detail'] as $key => $value){
-                                                array_push($temp_array,$value['itm_name']);
-                                          }
-                                            $itm = implode(",",$temp_array);
-
-                                        ?>
-                                        <div class="col-md-6">
-                                            {{$itm}}
-                                            <span class="badge bg-pink">${{$value_ord['total']}}</span>
-                                        </div>
+                        <ul class="list-group">
+                            @foreach($orders as $key_ord => $value_ord)
+                                <li class="list-group-item">
+                                    <?php
+                                    $temp_array = [];
+                                    foreach ($value_ord['product_detail'] as $key => $value){
+                                        array_push($temp_array,$value['itm_name']);
+                                    }
+                                    $itm = implode(",",$temp_array);
+                                    $string = (strlen($itm) > 50) ? substr($itm,0,45).'...' : $itm;
+                                    ?>
+                                    <div class="col-md-6">
+                                        {{$string}}
+                                        <span class="badge bg-pink">${{$value_ord['total']}}</span>
+                                    </div>
 
 
                                                 <div class="text-center">
@@ -139,6 +138,7 @@
                                 <h4>User Detail</h4>
                                     <li class="list-group-item">
                                         <span >Full Name : </span>
+                                        <input type="hidden" value="" id="orderId">
                                         <span id="userName" style="margin-left: 15px"></span>
                                     </li>
                                     <li class="list-group-item">
@@ -219,8 +219,21 @@
 
                 {{--</div>--}}
                 <div class="modal-footer">
+                    <div class="confirm-loading">
+                        <div class="preloader pl-size-xs" >
+                            <div class="spinner-layer pl-red-grey">
+                                <div class="circle-clipper left">
+                                    <div class="circle"></div>
+                                </div>
+                                <div class="circle-clipper right">
+                                    <div class="circle"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <button type="button" id="printOrder" class="btn btn-info waves-effect">Print</button>
-                    <button type="button" class="btn btn-success waves-effect">Confirmed</button>
+                    <button type="button" id="confirmOrder" class="btn btn-success waves-effect">Confirmed</button>
                     <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">CLOSE</button>
                 </div>
             </div>

@@ -95,6 +95,10 @@ class ProductController extends Controller
         return back()->with('returnStatus',true)->with('status' , 101)->with('message','Bucket Product Added successfully');
     }
 
+    /**
+     * View Bucket Products
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function viewBucketProducts(){
         $buc_pro = BucketProductModel::all();
         $page = 'products';
