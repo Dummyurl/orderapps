@@ -31,6 +31,8 @@ Route::group(['namespace' => 'Admin'], function () {
     Route::get('/add-coupon','AdminController@coupon');
     Route::post('/add-new-coupon','AdminController@addNewCoupon');
     Route::get('/get-order/{id}','OrderController@getOrder');
+    Route::get('/customer','AdminController@viewCustomer');
+    Route::get('/view-customer-order/{id}','AdminController@viewCustomerOrder');
 });
 
 
@@ -52,6 +54,10 @@ Route::group(['prefix' => 'product','namespace' => 'Admin'], function () {
     Route::get('/add-bucket-product','ProductController@bucketProductIndex');
     Route::post('/add-new-bucket-product','ProductController@bucketProductAdd');
     Route::get('/view-bucket-product','ProductController@viewBucketProducts');
+    Route::get('/edit-bucket-product/{id}','ProductController@editBucketProducts');
+    Route::post('/update-bucket-product','ProductController@updateBucketProduct');
+    Route::get('/delete-bucket-item/{id}','ProductController@deleteBucketItemById');
+    Route::get('/delete-bucket-related-item/{id}','ProductController@deleteBucketRelatedItemById');
 
 });
 

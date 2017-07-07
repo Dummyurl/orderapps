@@ -293,6 +293,19 @@ $('#without_attribute').change(function () {
                 that.prev().val(parseInt(++hiddencounter));
             });
 
+    $(document).on('click','#edit_add_optional_item',function () {
+        var that = $(this);
+        var hiddencounter = that.prev().val();
+        var elementToClone = that.parent().prev();
+        var clone = elementToClone.clone();
+        clone.find('.optional_itm_delete').remove();
+        clone.find('input[type=text]').val('');
+        clone.addClass('removeable')
+        elementToClone.after(clone);
+        that.prev().val(parseInt(++hiddencounter));
+    });
+
+
     $(document).on('click','#remove_optional_item',function () {
         var that = $(this);
         var hiddencounter = that.prev().prev().val();
@@ -371,7 +384,127 @@ $('#without_attribute').change(function () {
          elementToClone.after(clone);
     });
 
+
+    $(document).on('click','#edit_add_bucket_item',function () {
+        var total_itm = parseInt($('.total_bucket_item').text());
+        if(total_itm == 0){
+
+        console.log('test');
+            //Template start
+        var  template =  '<div class="panel-group" id="accordion_1" role="tablist" aria-multiselectable="true">'
+            template +=  '<div class="panel panel-col-cyan">'
+            template +=  '<div class="panel-heading" role="tab" id="headingOne_1">'
+            template +=  '<h4 class="panel-title">'
+            template +=   '<a role="button" data-toggle="collapse" data-parent="#accordion_1" href="#collapseOne_1" aria-expanded="false" aria-controls="collapseOne_1" class="collapsed link-parent">'
+            template +=  'Bucket Item #1'
+            template +=  '</a> </h4></div>'
+            template +=  '<div id="collapseOne_1" class="panel-collapse collapse bindpanel" role="tabpanel" aria-labelledby="headingOne_1" aria-expanded="false" style="height: 0px;">'
+            template +=  '<div class="panel-body">'
+            template +=  '<div class="row clearfix">'
+            template +=  '<div class="col-sm-6 ">'
+            template +=  '<label class="form-label">Bucket Item Name</label>'
+            template +=  '<div class="form-group form-float">'
+            template +=  '<div class="form-line">'
+            template +=  '<input type="text"  name="item_name[0]" required class="form-control single-index">'
+            template +=  '</div></div></div>'
+            template +=  '<div class="col-sm-6 ">'
+            template +=  '<label class="form-label">Bucket Item Quantity</label>'
+            template +=  '<div class="form-group form-float">'
+            template +=  '<div class="form-line">'
+            template +=  '<input type="number" min="0" max="50" name="item_qty[0]" required class="form-control single-index">'
+            template +=  '</div></div></div></div>'
+            template +=  '<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">'
+            template +=  '<div class="card">'
+            template +=  '<div class="header bg-blue-grey">'
+            template +=  '<h2>Optionable Items<small>Define Option Item for user to select Above Mention Quantity for Bucket Item </small></h2>'
+            template +=  '</div>'
+            template +=  '<div class="body remove_optional">'
+            template +=  '<div class="row clearfix">'
+            template +=  '<div class="col-sm-6 ">'
+            template +=  '<label class="form-label">Optional Item Name</label>'
+            template +=  '<div class="form-group form-float">'
+            template +=  '<div class="form-line">'
+            template +=  '<input type="text"  name="optional_item_name[0][]" class="form-control double-index">'
+            template +=  '</div></div></div>'
+            template +=  '<div class="col-sm-6 ">'
+            template +=  '<label class="form-label">Optional Item Price</label>'
+            template +=  '<div class="form-group form-float">'
+            template +=  '<div class="form-line">'
+            template +=  '<input type="text"  name="optional_item_price[0][]" class="form-control double-index">'
+            template +=  '</div></div></div></div>'
+            template +=  '<div class="row clearfix icon-button-demo text-right">'
+            template +=  '<input type="hidden"  name="counter_optional" value="1" >'
+            template +=  '<button type="button" id="add_optional_item" class="btn bg-grey btn-circle waves-effect waves-circle waves-float">'
+            template +=      '<i class="material-icons">add</i>'
+            template +=  '<button type="button" id="remove_optional_item" class="btn bg-blue-grey btn-circle waves-effect waves-circle waves-float">'
+            template +=  '<i class="material-icons">remove</i>'
+            template +=  '</button></div></div></div></div></div></div></div></div>'
+                    //Template End
+            var that = $(this);
+            var elementToClone = that.parent().prev();
+            $('.add-empty-hook').after(template);
+
+
+
+
+        }
+        else {
+            var total_itm = parseInt($('.total_bucket_item').text());
+            $('.total_bucket_item').text(total_itm + 1);
+
+            var that = $(this);
+            var elementToClone = that.parent().prev();
+            var clone = elementToClone.clone();
+            var cloneID = clone.attr('id');
+            clone.attr('id', replacestring(cloneID));
+            var link_parnet = clone.find('.link-parent').attr('data-parent');
+            clone.find('.link-parent').attr('data-parent',replacestring(link_parnet));
+            var link_parnet = clone.find('.link-parent').attr('href');
+            clone.find('.link-parent').attr('href',replacestring(link_parnet));
+            var cloneitm_text = clone.find('.link-parent').text();
+            clone.find('.link-parent').text(replacefromhash(cloneitm_text));
+            var bind_panel = clone.find('.bindpanel').attr('id');
+            clone.find('.bindpanel').attr('id',replacestring(bind_panel));
+            clone.find('input[type=text]').val('');
+            clone.find('input[type=hidden]').val(1);
+            clone.find('.removeable').remove();
+            clone.find('.buk_itm_delete').remove();
+            !clone.find('.remove_optional div.row').not('div.row:first').not('div.row:last').remove();
+            var input_text = clone.find('.single-index').each(function () {
+                var item = $(this).attr('name');
+                $(this).attr('name',replacefrombraces(item))
+            });
+
+            var input_number = clone.find('.double-index').each(function () {
+                var item_num = $(this).attr('name');
+                $(this).attr('name',replacefromdoublebraces(item_num))
+            });
+
+            clone.find('.optional_itm_delete').each(function () {
+                $(this).remove();
+            });
+            var hiddencounter_bucket = that.prev().val();
+            that.prev().val(parseInt(++hiddencounter_bucket));
+            elementToClone.after(clone);
+
+        }
+    });
+
         $(document).on('click','#remove_bucket_item' ,function () {
+            var that = $(this);
+            var hiddencounter = that.prev().prev().val();
+            if(parseInt(hiddencounter) == 1){
+                return false;
+            }
+            else {
+                var elementToRemove = that.parent().prev();
+                elementToRemove.remove();
+                var hiddencounter = that.prev().prev().val();
+                that.prev().prev().val(parseInt(--hiddencounter));
+            }
+        });
+
+        $(document).on('click','#edit_remove_bucket_item' , function () {
             var that = $(this);
             var hiddencounter = that.prev().prev().val();
             if(parseInt(hiddencounter) == 1){
@@ -461,5 +594,126 @@ $('#without_attribute').change(function () {
         });
 
     });
+
+        $(document).on('click','.buk_itm_delete',function () {
+            var itm = $(this).closest('div.panel-group');
+            var total_itm = parseInt($('.total_bucket_item').text());
+            $('.total_bucket_item').text(total_itm-1);
+            $(this).css("opacity","0.5");
+            $(this).closest('.panel-group').css("opacity","0.5");
+            var itm_id = $(this).attr('data-react')
+            $.ajax({
+                type: "GET",
+                url: APP_URL + '/product/delete-bucket-item/' + itm_id ,
+                data: {'itm_id':itm_id},
+                success: function (data) {
+                    var total_itm = parseInt($('.total_bucket_item').text());
+                    if(data.status == true){
+                         itm.remove();
+                       $.notify({
+                            message: data.message
+                        });
+                        if(total_itm == 0){
+
+                            console.log('test');
+                            //Template start
+                            var  template =  '<div class="panel-group" id="accordion_1" role="tablist" aria-multiselectable="true">'
+                            template +=  '<div class="panel panel-col-cyan">'
+                            template +=  '<div class="panel-heading" role="tab" id="headingOne_1">'
+                            template +=  '<h4 class="panel-title">'
+                            template +=   '<a role="button" data-toggle="collapse" data-parent="#accordion_1" href="#collapseOne_1" aria-expanded="false" aria-controls="collapseOne_1" class="collapsed link-parent">'
+                            template +=  'Bucket Item #1'
+                            template +=  '</a> </h4></div>'
+                            template +=  '<div id="collapseOne_1" class="panel-collapse collapse bindpanel" role="tabpanel" aria-labelledby="headingOne_1" aria-expanded="false" style="height: 0px;">'
+                            template +=  '<div class="panel-body">'
+                            template +=  '<div class="row clearfix">'
+                            template +=  '<div class="col-sm-6 ">'
+                            template +=  '<label class="form-label">Bucket Item Name</label>'
+                            template +=  '<div class="form-group form-float">'
+                            template +=  '<div class="form-line">'
+                            template +=  '<input type="text"  name="item_name[0]" required class="form-control single-index">'
+                            template +=  '</div></div></div>'
+                            template +=  '<div class="col-sm-6 ">'
+                            template +=  '<label class="form-label">Bucket Item Quantity</label>'
+                            template +=  '<div class="form-group form-float">'
+                            template +=  '<div class="form-line">'
+                            template +=  '<input type="number" min="0" max="50" name="item_qty[0]" required class="form-control single-index">'
+                            template +=  '</div></div></div></div>'
+                            template +=  '<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">'
+                            template +=  '<div class="card">'
+                            template +=  '<div class="header bg-blue-grey">'
+                            template +=  '<h2>Optionable Items<small>Define Option Item for user to select Above Mention Quantity for Bucket Item </small></h2>'
+                            template +=  '</div>'
+                            template +=  '<div class="body remove_optional">'
+                            template +=  '<div class="row clearfix">'
+                            template +=  '<div class="col-sm-6 ">'
+                            template +=  '<label class="form-label">Optional Item Name</label>'
+                            template +=  '<div class="form-group form-float">'
+                            template +=  '<div class="form-line">'
+                            template +=  '<input type="text"  name="optional_item_name[0][]" class="form-control double-index">'
+                            template +=  '</div></div></div>'
+                            template +=  '<div class="col-sm-6 ">'
+                            template +=  '<label class="form-label">Optional Item Price</label>'
+                            template +=  '<div class="form-group form-float">'
+                            template +=  '<div class="form-line">'
+                            template +=  '<input type="text"  name="optional_item_price[0][]" class="form-control double-index">'
+                            template +=  '</div></div></div></div>'
+                            template +=  '<div class="row clearfix icon-button-demo text-right">'
+                            template +=  '<input type="hidden"  name="counter_optional" value="1" >'
+                            template +=  '<button type="button" id="add_optional_item" class="btn bg-grey btn-circle waves-effect waves-circle waves-float">'
+                            template +=      '<i class="material-icons">add</i>'
+                            template +=  '<button type="button" id="remove_optional_item" class="btn bg-blue-grey btn-circle waves-effect waves-circle waves-float">'
+                            template +=  '<i class="material-icons">remove</i>'
+                            template +=  '</button></div></div></div></div></div></div></div></div>'
+                            //Template End
+                            var that = $(this);
+                            var elementToClone = that.parent().prev();
+                            $('.add-empty-hook').after(template);
+
+
+
+
+                        }
+                    }
+
+                }
+            });
+        });
+
+        $(document).on('click','.optional_itm_delete',function () {
+            var temp_sle = $(this).closest('.remove_optional');
+            var count = temp_sle.children('div.row').length
+            if(count - 1 == 1){
+                swal("Can not delete optional item At least one item must on bucket item");
+                return false;
+            }
+            var opt_itm = $(this).closest('div.row')
+            opt_itm.css("opacity","0.3");
+            var related_id= opt_itm.attr('data-react');
+            $.ajax({
+                type: "GET",
+                url: APP_URL + '/product/delete-bucket-related-item/' + related_id,
+                data: {'related_itm_id':related_id},
+                success: function (data){
+                    var total_itm = parseInt($('.total_bucket_item').text());
+                    if(data.status == true) {
+                        opt_itm.remove();
+                        $.notify({
+                            message: data.message
+                        });
+                    }
+                }
+            });
+        });
+
+        $(document).on('click','#add_extra' ,function () {
+            var check = $(this).prev().val();
+            if(check == 0){
+
+                
+            }
+        });
+
+
 
 });

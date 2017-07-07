@@ -19,35 +19,36 @@
                     <div class="card">
                         <div class="header">
                             <h2>
-                                Items
+                                ALL CUSTOMER
                             </h2>
                         </div>
                         <div class="body">
-                            <table class="table table-responsive table-bordered table-striped table-hover js-basic-example dataTable">
+                            <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
                                 <thead>
                                 <tr>
-                                    <th>Items Name</th>
-                                    <th>Category Name</th>
-                                    <th>Items Price</th>
-                                    <th>Items Description</th>
-                                    <th>Action</th>
+                                    <th>ID</th>
+                                    <th>Customer Full Name</th>
+                                    <th>Customer Email</th>
+                                    <th>Customer Mobile no.</th>
+                                    <th>Orders</th>
+
                                 </tr>
                                 </thead>
 
                                 <tbody>
-                                @foreach($products as $keypro => $valuepro)
-                                            <tr>
-                                                <td>{{$valuepro['bucket_name']}}</td>
-                                                <td>{{$valuepro['category']}}</td>
-                                                <td>{{$valuepro['bucket_price']}}</td>
-                                                <td>{{$valuepro['bucket_description']}}</td>
-                                                <td>
-                                                 <a href="{{url('product/edit-bucket-product').'/'.$valuepro['id']}}"><button type="submit"  class="btn btn-primary m-t-15 waves-effect">Edit</button></a>
-                                                    <button type="submit"  class="btn btn-info m-t-15 waves-effect">Delete</button>
-                                                </td>
-                                            </tr>
+                                @foreach($customer as $keycustomer => $valuecustomer)
 
 
+                                    <tr>
+                                        <td>{{$valuecustomer['id']}}</td>
+                                        <td>{{$valuecustomer['customer_name']}}</td>
+                                        <td>{{$valuecustomer['email']}}</td>
+                                        <td>{{$valuecustomer['customer_mobile']}}</td>
+                                        <td>
+                                            <a href="{{url('view-customer-order').'/'.$valuecustomer['id']}}"> <button type="submit"  class="btn btn-primary m-t-15 waves-effect">View Orders</button></a>
+                                        </td>
+
+                                    </tr>
                                 @endforeach
                                 </tbody>
                             </table>

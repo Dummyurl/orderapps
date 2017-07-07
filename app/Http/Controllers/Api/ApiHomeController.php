@@ -13,6 +13,7 @@ use App\Models\CustomerModel;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Carbon\Carbon;
+use Mockery\Exception;
 use Response;
 use App\Models\CategoryModel;
 use Illuminate\Support\Facades\Input;
@@ -102,78 +103,53 @@ class ApiHomeController extends Controller
 
 
     public function newOrder(Request $request){
-        $data = Input::all();
-        $customer = CustomerModel::whereEmail($data['email'])->first();
-       // dd($customer);
+      try{
+            $data = Input::all();
+            $customer = CustomerModel::whereEmail($data['email'])->first();
+            // dd($customer);
 
-           if($customer == null){
-               $customerArray = [
-                   'customer_name'=>$data['full_name'],
-                   'email'=>$data['email'],
-                   'customer_mobile'=>$data['phone_no'],
-                   'created_at'=>Carbon::now(),
-               ];
+            if($customer == null){
+                $customerArray = [
+                    'customer_name'=>$data['full_name'],
+                    'email'=>$data['email'],
+                    'customer_mobile'=>$data['phone_no'],
+                    'created_at'=>Carbon::now(),
+                ];
 
-               $customer_id = CustomerModel::insertGetId($customerArray);
-           }
-           else{
-               $customer_id = $customer->id;
-           }
+                $customer_id = CustomerModel::insertGetId($customerArray);
+            }
+            else{
+                $customer_id = $customer->id;
+            }
 
-        //dd($data);
-//        $data = '{
-//  "full_name":"pankaj",
-//  "email":"pankaj@gmail.com",
-//  "phone_no":"9827698850",
-//  "intruction":null,
-//  "discount_code":null,
-//  "delivery":true,
-//  "collection":false,
-//  "delivery_post_code":"PAN 3AN",
-//  "address_line1":"1st Floor Pramukh Plaza, Near Sajan Prabha Garden, Vijay Nagar, Indore, Madhya Pradesh",
-//  "address_line2":null,
-//  "city":"Indore",
-//  "request_delivery_time":null,
-//      "product_detail":{
-//              "0":{
-//                  "itm_name":"Pizza 8 Cheese",
-//                  "itm_price":"4.65"
-//              },
-//              "1":{
-//                  "itm_name":"Set Meal A",
-//                  "itm_price":"7.95"
-//              },
-//              "2":{
-//                  "itm_name":"Tandoori Mix",
-//                  "itm_price":"12.00"
-//              }
-//
-//      },
-//  "discount":null,
-//  "delivery_charge":"1.60",
-//  "transacation_fee": "0.50"
-//
-//
-//}';
-        // $temp_data = json_decode($data, true);
 
-        $pro_detail_tem = $data['product_detail'];
 
-        unset($data['product_detail']);
-        $pro_detail = json_encode($pro_detail_tem);
-        $data['product_detail'] =$pro_detail;
-        $data['created_at'] = Carbon::now();
-        $data['customer_id'] = $customer_id;
+            $pro_detail_tem = $data['product_detail'];
 
-        //temporary Transcation Id
-        $data['transcation_id'] = str_random(25);
+            unset($data['product_detail']);
+            $pro_detail = json_encode($pro_detail_tem);
+            $data['product_detail'] =$pro_detail;
+            $data['created_at'] = Carbon::now();
+            $data['customer_id'] = $customer_id;
 
-        $insert = OrderModel::insert($data);
-        $return_array = [
-            'status'=>true,
-            'message'=>'Order Added successfully'
-        ];
-        return Response::json($return_array);
+            //temporary Transcation Id
+            // $data['transcation_id'] = str_random(25);
+
+            $insert = OrderModel::insert($data);
+
+            $return_array = [
+                'status'=>true,
+                'message'=>'Order Added successfully'
+            ];
+
+
+            return Response::json($return_array);
+        }
+        catch(\Exception $ex)
+        {
+            return Response::json(['status'=>false,'message'=>$ex->getMessage()]);
+        }
+
 
 
     }

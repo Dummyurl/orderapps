@@ -5,7 +5,7 @@
     <section class="content">
         <div class="container-fluid">
             <div class="block-header">
-                <h2>ORDERS</h2>
+                <h2>CUSTOMER ORDERS</h2>
             </div>
 
 
@@ -14,7 +14,7 @@
                     <div class="card">
                         <div class="header">
                             <h2>
-                                PENDING ORDERS
+                               {{strtoupper($orders[0]['full_name'])}} ORDERS
                             </h2>
                         </div>
                         <div class="body">

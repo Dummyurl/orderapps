@@ -31,7 +31,7 @@ class CreateOrderTable extends Migration
             $table->string('discount')->nullable();
             $table->string('delivery_charge')->nullable();
             $table->string('transacation_fee')->nullable();
-            $table->string('total')->nullable();
+            $table->string('total');
             $table->string('status')->default('pending');
             $table->string('transcation_id');
             $table->timestamps();

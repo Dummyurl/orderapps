@@ -60,6 +60,13 @@
                     </ul>
                 </li>
 
+                <li class="{{(isset($page) && $page && $page=='customer')?'active':''}}">
+                    <a href="{{url('/customer')}}">
+                        <i class="material-icons">group</i>
+                        <span>Customers</span>
+                    </a>
+                </li>
+
 
                 <li class="{{(isset($page) && $page && $page=='categories')?'active':''}}">
                     <a href="javascript:void(0);" class="menu-toggle">

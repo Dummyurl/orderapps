@@ -98,7 +98,7 @@
                                     ?>
                                     <div class="col-md-6">
                                         {{$string}}
-                                        <span class="badge bg-pink">${{$value_ord['total']}}</span>
+                                        <span class="badge bg-pink">&#163;{{$value_ord['total']}}</span>
                                     </div>
 
 

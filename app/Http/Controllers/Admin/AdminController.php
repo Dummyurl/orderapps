@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Auth;
 use Response;
 use App\Models\CategoryAttributeModel;
 use App\Models\CategoryModel;
+use App\Models\CustomerModel;
 
 class AdminController extends Controller
 {
@@ -42,7 +43,7 @@ class AdminController extends Controller
     {
 
         $page = 'dashboard';
-        $temp_orders = OrderModel::GetPendingOrder()->get()->toArray();
+        $temp_orders = OrderModel::GetPendingOrder()->orderBy('created_at','desc')->get()->toArray();
         $orders = [];
         foreach ($temp_orders as $key_ord => $value_ord){
             $product_detail = json_decode($value_ord['product_detail'],true);
@@ -264,4 +265,26 @@ class AdminController extends Controller
             return back()->with('returnStatus', true)->with('status', 101)->with('message', 'Coupon Update successfully');
     }
 
+    /**
+     * View All Customer
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function viewCustomer(){
+        $page = 'customer';
+        $customer = CustomerModel::all()->toArray();
+        return view('vendor.admin.viewcustomer',compact('page','customer'));
+    }
+
+    public function viewCustomerOrder($cust_id){
+        $page = 'customer';
+        $tem_orders =  CustomerModel::find($cust_id)->customerOrders()->get()->toArray();
+        $orders = [];
+        foreach ($tem_orders as $key_ord => $value_ord){
+            $product_detail = json_decode($value_ord['product_detail'],true);
+            $value_ord['product_detail'] = $product_detail;
+            array_push($orders,$value_ord);
+        }
+
+        return view('vendor.admin.customerorder',compact('page','orders'));
+    }
 }

@@ -8047,9 +8047,9 @@ html.ie11 .bs-searchbox .form-control {
   left: 60%;
   display: none;
 }
-.custom-modal-dialog{
-  width: 980px;
-}
+/*.custom-modal-dialog{*/
+  /*width: 980px;*/
+/*}*/
 
 .confirm-loading{
   display: none;

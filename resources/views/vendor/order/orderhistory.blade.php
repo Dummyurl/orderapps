@@ -27,10 +27,10 @@
                                             array_push($temp_array,$value['itm_name']);
                                         }
                                         $itm = implode(",",$temp_array);
-
+                                        $string = (strlen($itm) > 50) ? substr($itm,0,45).'...' : $itm;
                                         ?>
                                         <div class="col-md-6">
-                                            {{$itm}}
+                                            {{$string}}
                                             <span class="badge bg-pink">${{$value_ord['total']}}</span>
                                         </div>
 

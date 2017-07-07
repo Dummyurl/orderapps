@@ -41,6 +41,9 @@
 
 <script src="{{URL::asset('public/plugins/chartjs/Chart.bundle.js')}}"></script>
 
+ {{--Sweet Alert--}}
+<script src="{{URL::asset('public/plugins/sweetalert/sweetalert.min.js')}}"></script>
+
 <!-- Custom Js -->
 <script src="{{URL::asset('public/js/admin.js')}}"></script>
 

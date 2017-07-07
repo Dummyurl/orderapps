@@ -56,12 +56,19 @@
 
                                 </div>
 
+                                <div class="row text-right button-demo">
+                                    <input type="hidden" name="counter_bucket" value="0">
+                                    <button type="button" id="add_extra" class="btn bg-teal waves-effect">Add Item Extra</button>
+                                    <button type="button" id="remove_extra" class="btn bg-light-blue waves-effect">Remove Item Extra</button>
+                                </div>
+
                                 <button type="submit" id="submit_pro"  class="btn btn-primary m-t-15 waves-effect">Add Item</button>
                             </form>
                         </div>
                     </div>
                 </div>
             </div>
+
             <!-- Vertical Layout | With Floating Label -->
 
             {{--<div class="row clearfix">--}}

@@ -29,6 +29,9 @@
 
     <link href="{{URL::asset('public/plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css')}}" rel="stylesheet">
 
+     {{--Sweet Alert--}}
+    <link href="{{URL::asset('public/plugins/sweetalert/sweetalert.css')}}" rel="stylesheet">
+
     <!-- Custom Css -->
     <link href="{{URL::asset('public/css/style.css')}}" rel="stylesheet">
 
