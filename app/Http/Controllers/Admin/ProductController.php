@@ -52,6 +52,7 @@ class ProductController extends Controller
      * Add New Product Into Catlog
      */
     public function productAdd(Request $req,ProductRepository $prorepo){
+        dd($req->all());
         if ($prorepo->addNewProduct($req->all()))
             return back()->with('returnStatus',true)->with('status' , 101)->with('message','Product Added successfully');
     }

@@ -709,10 +709,46 @@ $('#without_attribute').change(function () {
         $(document).on('click','#add_extra' ,function () {
             var check = $(this).prev().val();
             if(check == 0){
+                $(this).prev().val(++check);
+              var template1 =  '<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 removablehook">'
+                template1 +=   '<div class="card">'
+                template1 +=   '<div class="header bg-blue-grey">'
+                template1 +=   '<h2>Extra Items<small>Define Extra item related to Above Item</small></h2>'
+                template1 +=   '</div>'
+                template1 +=    '<div class="body remove_optional">'
+                template1 +=   '<div class="row clearfix">'
+                template1 +=   '<div class="col-sm-6">'
+                template1 +=   '<label class="form-label">Extra Item Name</label>'
+                template1 +=   '<div class="form-group form-float">'
+                template1 +=   '<div class="form-line">'
+                template1 +=  '<input type="text"  name="extra_item_name[0][]" class="form-control double-index">'
+                template1 += '</div></div></div>'
+                template1 +=   '<div class="col-sm-6 ">'
+                template1 +=   '<label class="form-label">Extra Item Price</label>'
+                template1 +=   '<div class="form-group form-float">'
+                template1 +=   '<div class="form-line">'
+                template1 +=   '<input type="text"  name="extra_item_price[0][]" class="form-control double-index">'
+                template1 +='</div></div></div></div>'
+                template1 +=   '<div class="row clearfix icon-button-demo text-right">'
+                template1 +=   '<input type="hidden"  name="counter_optional" value="1" >'
+                template1 +=   '<button type="button" id="add_optional_item" class="btn bg-grey btn-circle waves-effect waves-circle waves-float">'
+                template1 +=   '<i class="material-icons">add</i>'
+                template1 +=   '<button type="button" id="remove_optional_item" class="btn bg-blue-grey btn-circle waves-effect waves-circle waves-float">'
+                template1 +=   '<i class="material-icons">remove</i>'
+                template1 +=   '</button></div></div></div>'
 
+                $('.extra_add_form').append(template1);
                 
             }
         });
+
+    $(document).on('click','#remove_extra' ,function () {
+        var check = $(this).prev().prev().val();
+        if(check > 0){
+            $(this).prev().prev().val(--check);
+            $('.removablehook').remove();
+        }
+    })
 
 
 

@@ -55,7 +55,7 @@
                                 <div class="response">
 
                                 </div>
-
+                                <div class="row extra_add_form"></div>
                                 <div class="row text-right button-demo">
                                     <input type="hidden" name="counter_bucket" value="0">
                                     <button type="button" id="add_extra" class="btn bg-teal waves-effect">Add Item Extra</button>
